@@ -68,7 +68,7 @@ Player =
           
 endGame = ->
   console.log """
-    You found sanctuary.
+    You found Sanctuary.
 
     Your score: #{Player.points}
     Press R to play again.
@@ -82,11 +82,12 @@ draw = (n) ->
     lastLine = map[Player.y]
     console.log lastLine
       
-do reset = ->
+reset = ->
   console.clear?()
   map = map.map (l) -> l.replace items.char, items.floor
   Player.setPosition 5, 0
   lastLine = null
+  draw()
   
 document.addEventListener 'keydown', (e) ->
   return reset() if e.keyCode is 82
@@ -98,3 +99,13 @@ document.addEventListener 'keydown', (e) ->
 window.addEventListener 'error', (e) ->
   reset()
 , false
+
+document.getElementById('start').addEventListener 'click', reset, false
+
+console.log """
+\n\n\n\n\n\n\n\n\n\n\n
+###########
+# Sandman #
+###########
+You've managed to escape. Run and don't look back.\n
+"""
