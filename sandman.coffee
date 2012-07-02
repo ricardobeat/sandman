@@ -84,10 +84,10 @@ draw = (n) ->
     console.log lastLine
       
 reset = ->
-  console.clear?()
   map = map.map (l) -> l.replace items.char, items.floor
   Player.setPosition 5, 0
   lastLine = null
+  intro()
   draw()
   
 document.addEventListener 'keydown', (e) ->
@@ -102,7 +102,7 @@ window.addEventListener 'error', (e) ->
 
 document.getElementById('start').addEventListener 'click', reset, false
 
-setTimeout ->
+intro = ->
   console.log """
   \n\n\n\n\n\
   ###########
@@ -111,4 +111,7 @@ setTimeout ->
   You've managed to escape. There is only one way to go.
   Your own shadow echoes the steps you took along the way.\n
   """
-, 1000
+
+if ~navigator.userAgent.indexOf('WebKit')
+  setTimeout intro, 1000
+  intro = ->
