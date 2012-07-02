@@ -102,10 +102,12 @@ window.addEventListener 'error', (e) ->
 
 document.getElementById('start').addEventListener 'click', reset, false
 
-console.log """
-\n\n\n\n\n\n\n\n\n\n\n
-###########
-# Sandman #
-###########
-You've managed to escape. Run and don't look back.\n
-"""
+setTimeout ->
+  console.log """
+  \n\n\n\n\n\
+  ###########
+  # Sandman #
+  ###########
+  You've managed to escape. Run and don't look back.\n
+  """
+, 1000
