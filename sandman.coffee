@@ -110,6 +110,7 @@ setTimeout ->
   ###########
   # Sandman #
   ###########
-  You've managed to escape. Run and don't look back.\n
+  You've managed to escape. There is only one way to go.
+  Your own shadow echoes the steps you took along the way.\n
   """
 , 1000
