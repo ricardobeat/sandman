@@ -73,7 +73,6 @@ endGame = ->
     You found Sanctuary.
 
     Your score: #{Player.points}
-    Press R to play again.
   """
       
 draw = (n) ->
@@ -92,7 +91,6 @@ reset = ->
   draw()
   
 document.addEventListener 'keydown', (e) ->
-  return reset() if e.keyCode is 82
   directions = ['left', 'up', 'right', 'down']
   Player.move directions[e.keyCode - 37]
   draw()
