@@ -17,14 +17,14 @@ map = """
 --###### ######  ####-
 --# k    #----#s    #-
 --#      #----####  #-
---# #s## #-------#  #-
+--# #### #-------#  #-
 --# ####k#--######  #-
 --# #### #--#       #-
---#      #--# # # # #-
+--#s     #--# #   # #-
 --###  ###--# #   # #-
-----#  #----# #   # #-
+----#  #----#s#   # #-
 ----#  #----#k# ### #-
-----#  #------# ### #-
+----#  #------# s## #-
 -####  ####--## ### #-
 -#       s         sk-
 -# ####k#### ########-
@@ -68,10 +68,11 @@ Player =
           
 endGame = ->
   console.log """
-    You found sanctuary.
+    You found Sanctuary.
+
     Your score: #{Player.points}
+    Press R to play again.
   """
-  reset(1)
       
 draw = (n) ->
   line = (map[Player.y] = map[Player.y].replace(items.char, items.floor)).split('')
@@ -81,12 +82,15 @@ draw = (n) ->
     lastLine = map[Player.y]
     console.log lastLine
       
-do reset = (quiet) ->
+reset = ->
+  console.clear?()
   map = map.map (l) -> l.replace items.char, items.floor
-  Player.setPosition 5, 0 unless quiet
+  Player.setPosition 5, 0
   lastLine = null
+  draw()
   
 document.addEventListener 'keydown', (e) ->
+  return reset() if e.keyCode is 82
   directions = ['left', 'up', 'right', 'down']
   Player.move directions[e.keyCode - 37]
   draw()
@@ -95,3 +99,13 @@ document.addEventListener 'keydown', (e) ->
 window.addEventListener 'error', (e) ->
   reset()
 , false
+
+document.getElementById('start').addEventListener 'click', reset, false
+
+console.log """
+\n\n\n\n\n\n\n\n\n\n\n
+###########
+# Sandman #
+###########
+You've managed to escape. Run and don't look back.\n
+"""
