@@ -69,9 +69,10 @@ Player =
 endGame = ->
   console.log """
     You found sanctuary.
+
     Your score: #{Player.points}
+    Press R to play again.
   """
-  reset(1)
       
 draw = (n) ->
   line = (map[Player.y] = map[Player.y].replace(items.char, items.floor)).split('')
@@ -81,12 +82,14 @@ draw = (n) ->
     lastLine = map[Player.y]
     console.log lastLine
       
-do reset = (quiet) ->
+do reset = ->
+  console.clear?()
   map = map.map (l) -> l.replace items.char, items.floor
-  Player.setPosition 5, 0 unless quiet
+  Player.setPosition 5, 0
   lastLine = null
   
 document.addEventListener 'keydown', (e) ->
+  return reset() if e.keyCode is 82
   directions = ['left', 'up', 'right', 'down']
   Player.move directions[e.keyCode - 37]
   draw()
